@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "name": "Michael Rodriguez",
+    "rating": 4.9,
+    "vehicleModel": "Toyota Camry 2022",
+    "plateNumber": "NYC-4567",
+    "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+  },
+  {
+    "Id": 2,
+    "name": "Sarah Johnson",
+    "rating": 4.8,
+    "vehicleModel": "Honda Accord 2023",
+    "plateNumber": "NYC-8901",
+    "photoUrl": "https://images.unsplash.com/photo-1494790108755-2616b332c3cf?w=150&h=150&fit=crop&crop=face"
+  },
+  {
+    "Id": 3,
+    "name": "David Chen",
+    "rating": 4.7,
+    "vehicleModel": "BMW 3 Series 2023",
+    "plateNumber": "NYC-2345",
+    "photoUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+  },
+  {
+    "Id": 4,
+    "name": "Emma Thompson",
+    "rating": 4.9,
+    "vehicleModel": "Nissan Altima 2022",
+    "plateNumber": "NYC-6789",
+    "photoUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+  },
+  {
+    "Id": 5,
+    "name": "James Wilson",
+    "rating": 4.6,
+    "vehicleModel": "Mercedes C-Class 2023",
+    "plateNumber": "NYC-3456",
+    "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+  }
+]

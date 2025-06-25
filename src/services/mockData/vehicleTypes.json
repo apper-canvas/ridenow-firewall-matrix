@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "name": "Economy",
+    "capacity": 4,
+    "basePrice": 5.00,
+    "pricePerKm": 1.20,
+    "iconUrl": "car-front",
+    "description": "Affordable rides for everyday trips",
+    "eta": "3-5 min"
+  },
+  {
+    "Id": 2,
+    "name": "Comfort",
+    "capacity": 4,
+    "basePrice": 8.00,
+    "pricePerKm": 1.80,
+    "iconUrl": "car",
+    "description": "Premium vehicles with extra space",
+    "eta": "4-7 min"
+  },
+  {
+    "Id": 3,
+    "name": "Premium",
+    "capacity": 4,
+    "basePrice": 12.00,
+    "pricePerKm": 2.50,
+    "iconUrl": "car-taxi-front",
+    "description": "Luxury cars for special occasions",
+    "eta": "6-10 min"
+  },
+  {
+    "Id": 4,
+    "name": "XL",
+    "capacity": 6,
+    "basePrice": 10.00,
+    "pricePerKm": 2.20,
+    "iconUrl": "truck",
+    "description": "Extra space for groups and luggage",
+    "eta": "5-8 min"
+  }
+]

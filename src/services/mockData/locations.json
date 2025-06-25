@@ -1,0 +1,58 @@
+[
+  {
+    "Id": 1,
+    "address": "123 Main St, Downtown",
+    "latitude": 40.7128,
+    "longitude": -74.0060,
+    "name": "Main Street Plaza"
+  },
+  {
+    "Id": 2,
+    "address": "456 Park Ave, Midtown",
+    "latitude": 40.7580,
+    "longitude": -73.9855,
+    "name": "Central Park South"
+  },
+  {
+    "Id": 3,
+    "address": "789 Broadway, Theater District",
+    "latitude": 40.7590,
+    "longitude": -73.9845,
+    "name": "Times Square"
+  },
+  {
+    "Id": 4,
+    "address": "321 5th Ave, Shopping District",
+    "latitude": 40.7505,
+    "longitude": -73.9934,
+    "name": "5th Avenue Mall"
+  },
+  {
+    "Id": 5,
+    "address": "567 Wall St, Financial District",
+    "latitude": 40.7074,
+    "longitude": -74.0113,
+    "name": "Wall Street Hub"
+  },
+  {
+    "Id": 6,
+    "address": "890 Brooklyn Bridge, DUMBO",
+    "latitude": 40.7033,
+    "longitude": -73.9973,
+    "name": "Brooklyn Bridge Park"
+  },
+  {
+    "Id": 7,
+    "address": "234 Union Square, East Village",
+    "latitude": 40.7359,
+    "longitude": -73.9911,
+    "name": "Union Square Station"
+  },
+  {
+    "Id": 8,
+    "address": "678 SoHo St, SoHo",
+    "latitude": 40.7230,
+    "longitude": -74.0020,
+    "name": "SoHo Gallery District"
+  }
+]
