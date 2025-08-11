@@ -51,11 +51,11 @@ const Layout = () => {
                     </span>
                   </motion.div>
                   
-                  {isActive && (
+{isActive && (
                     <motion.div
                       layoutId="activeTab"
                       className="absolute top-0 left-1/2 w-8 h-1 bg-secondary rounded-b-full"
-                      style={{ x: '-50%' }}
+                      style={{ transform: 'translateX(-50%)' }}
                     />
                   )}
                 </NavLink>
