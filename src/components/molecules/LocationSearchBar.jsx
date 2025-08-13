@@ -36,7 +36,7 @@ const LocationSearchBar = ({
 
     setIsLoading(true);
     try {
-      const results = await locationService.searchLocations(searchQuery);
+const results = await locationService.searchLocations(searchQuery);
       setSuggestions(results);
       setShowSuggestions(true);
     } catch (error) {
@@ -61,7 +61,7 @@ const LocationSearchBar = ({
     }, 300);
   };
 
-  const handleLocationSelect = (location) => {
+const handleLocationSelect = (location) => {
     setQuery(location.name);
     setShowSuggestions(false);
     onLocationSelect?.(location);
@@ -123,7 +123,7 @@ const LocationSearchBar = ({
               >
                 <ApperIcon name="MapPin" size={16} className="text-gray-400 flex-shrink-0" />
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium text-primary truncate">{location.name}</p>
+<p className="font-medium text-primary truncate">{location.name}</p>
                   <p className="text-sm text-gray-500 truncate">{location.address}</p>
                 </div>
               </motion.button>

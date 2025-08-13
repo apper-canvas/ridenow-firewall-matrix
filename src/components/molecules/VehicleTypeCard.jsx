@@ -30,11 +30,11 @@ const VehicleTypeCard = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className={`p-2 rounded-full ${selected ? 'bg-secondary text-white' : 'bg-gray-100 text-gray-600'}`}>
-              <ApperIcon name={vehicleType.iconUrl} size={20} />
+<ApperIcon name={vehicleType.iconUrl} size={20} />
             </div>
             
             <div>
-              <h3 className="font-semibold text-primary">{vehicleType.name}</h3>
+<h3 className="font-semibold text-primary">{vehicleType.name}</h3>
               <p className="text-sm text-gray-500">
                 {vehicleType.capacity} seats • {vehicleType.eta}
               </p>
@@ -46,10 +46,10 @@ const VehicleTypeCard = ({
           
           <div className="text-right">
             <p className="font-bold text-primary">
-              ${estimatedPrice || vehicleType.basePrice}
+${estimatedPrice || vehicleType.basePrice}
             </p>
             <p className="text-xs text-gray-500">
-              + ${vehicleType.pricePerKm}/km
++ ${vehicleType.pricePerKm}/km
             </p>
           </div>
         </div>

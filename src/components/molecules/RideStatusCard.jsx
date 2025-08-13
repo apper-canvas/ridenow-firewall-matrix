@@ -113,7 +113,7 @@ const RideStatusCard = ({ ride, driver, className = '', onAction }) => {
           <div className="min-w-0 flex-1">
             <p className="font-medium text-primary">Pickup</p>
             <p className="text-sm text-gray-600 break-words">
-              {ride.pickupLocation.name || ride.pickupLocation.address}
+{ride.pickupLocation?.name || ride.pickupLocation?.address}
             </p>
           </div>
         </div>
@@ -125,7 +125,7 @@ const RideStatusCard = ({ ride, driver, className = '', onAction }) => {
           <div className="min-w-0 flex-1">
             <p className="font-medium text-primary">Dropoff</p>
             <p className="text-sm text-gray-600 break-words">
-              {ride.dropoffLocation.name || ride.dropoffLocation.address}
+{ride.dropoffLocation?.name || ride.dropoffLocation?.address}
             </p>
           </div>
         </div>

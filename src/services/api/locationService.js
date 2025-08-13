@@ -1,41 +1,156 @@
-import locationsData from '../mockData/locations.json';
-
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+import { toast } from 'react-toastify';
 
 class LocationService {
   constructor() {
-    this.locations = [...locationsData];
+    // Initialize ApperClient
+    this.apperClient = null;
+    this.initializeClient();
+    this.tableName = 'location_c';
+  }
+
+  initializeClient() {
+    if (window.ApperSDK) {
+      const { ApperClient } = window.ApperSDK;
+      this.apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+    }
   }
 
   async getAll() {
-    await delay(200);
-    return [...this.locations];
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        fields: [
+          { field: { Name: "Id" } },
+          { field: { Name: "Name" } },
+          { field: { Name: "address_c" } },
+          { field: { Name: "latitude_c" } },
+          { field: { Name: "longitude_c" } }
+        ],
+        pagingInfo: { limit: 100, offset: 0 }
+      };
+
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return [];
+      }
+
+      // Map database fields to expected format
+      return response.data.map(location => ({
+        Id: location.Id,
+        name: location.Name,
+        address: location.address_c,
+        latitude: location.latitude_c,
+        longitude: location.longitude_c
+      }));
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching locations:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      return [];
+    }
   }
 
   async getById(id) {
-    await delay(150);
-    const location = this.locations.find(l => l.Id === parseInt(id, 10));
-    if (!location) {
-      throw new Error('Location not found');
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        fields: [
+          { field: { Name: "Id" } },
+          { field: { Name: "Name" } },
+          { field: { Name: "address_c" } },
+          { field: { Name: "latitude_c" } },
+          { field: { Name: "longitude_c" } }
+        ]
+      };
+
+      const response = await this.apperClient.getRecordById(this.tableName, id, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      // Map database fields to expected format
+      return {
+        Id: response.data.Id,
+        name: response.data.Name,
+        address: response.data.address_c,
+        latitude: response.data.latitude_c,
+        longitude: response.data.longitude_c
+      };
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching location with ID ${id}:`, error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      return null;
     }
-    return { ...location };
   }
 
   async searchLocations(query) {
-    await delay(300);
-    if (!query || query.length < 2) {
+    try {
+      if (!query || query.length < 2) {
+        return [];
+      }
+
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        fields: [
+          { field: { Name: "Id" } },
+          { field: { Name: "Name" } },
+          { field: { Name: "address_c" } },
+          { field: { Name: "latitude_c" } },
+          { field: { Name: "longitude_c" } }
+        ],
+        where: [
+          {
+            FieldName: "Name",
+            Operator: "Contains",
+            Values: [query]
+          }
+        ],
+        pagingInfo: { limit: 5, offset: 0 }
+      };
+
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        return [];
+      }
+
+      // Map database fields to expected format
+      return response.data.map(location => ({
+        Id: location.Id,
+        name: location.Name,
+        address: location.address_c,
+        latitude: location.latitude_c,
+        longitude: location.longitude_c
+      }));
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error searching locations:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
       return [];
     }
-
-    const searchTerm = query.toLowerCase();
-    return this.locations.filter(location => 
-      location.name.toLowerCase().includes(searchTerm) ||
-      location.address.toLowerCase().includes(searchTerm)
-    ).slice(0, 5); // Limit to 5 results
   }
 
   async getCurrentLocation() {
-    await delay(400);
     // Simulate getting user's current location
     return {
       address: "Current Location",
@@ -46,21 +161,114 @@ class LocationService {
   }
 
   async getLocationFromCoordinates(lat, lng) {
-    await delay(350);
-    // Simulate reverse geocoding
-    const nearestLocation = this.locations.reduce((closest, location) => {
-      const distance = Math.sqrt(
-        Math.pow(location.latitude - lat, 2) + Math.pow(location.longitude - lng, 2)
-      );
-      return distance < closest.distance ? { location, distance } : closest;
-    }, { location: this.locations[0], distance: Infinity });
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        fields: [
+          { field: { Name: "Id" } },
+          { field: { Name: "Name" } },
+          { field: { Name: "address_c" } },
+          { field: { Name: "latitude_c" } },
+          { field: { Name: "longitude_c" } }
+        ],
+        pagingInfo: { limit: 10, offset: 0 }
+      };
 
-    return {
-      ...nearestLocation.location,
-      address: `Near ${nearestLocation.location.name}`,
-      latitude: lat,
-      longitude: lng
-    };
+      const response = await this.apperClient.fetchRecords(this.tableName, params);
+      
+      if (!response.success || !response.data.length) {
+        return {
+          address: `${lat}, ${lng}`,
+          latitude: lat,
+          longitude: lng,
+          name: "Unknown Location"
+        };
+      }
+
+      // Find nearest location (simplified)
+      const nearestLocation = response.data[0];
+      
+      return {
+        Id: nearestLocation.Id,
+        name: nearestLocation.Name,
+        address: `Near ${nearestLocation.Name}`,
+        latitude: lat,
+        longitude: lng
+      };
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error getting location from coordinates:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      return {
+        address: `${lat}, ${lng}`,
+        latitude: lat,
+        longitude: lng,
+        name: "Unknown Location"
+      };
+    }
+  }
+
+  async create(locationData) {
+    try {
+      if (!this.apperClient) this.initializeClient();
+      
+      const params = {
+        records: [
+          {
+            Name: locationData.name,
+            address_c: locationData.address,
+            latitude_c: locationData.latitude,
+            longitude_c: locationData.longitude
+          }
+        ]
+      };
+
+      const response = await this.apperClient.createRecord(this.tableName, params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        toast.error(response.message);
+        return null;
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create location records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              toast.error(`${error.fieldLabel}: ${error}`);
+            });
+            if (record.message) toast.error(record.message);
+          });
+        }
+        
+        if (successfulRecords.length > 0) {
+          const createdRecord = successfulRecords[0].data;
+          return {
+            Id: createdRecord.Id,
+            name: createdRecord.Name,
+            address: createdRecord.address_c,
+            latitude: createdRecord.latitude_c,
+            longitude: createdRecord.longitude_c
+          };
+        }
+      }
+      return null;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating location:", error?.response?.data?.message);
+      } else {
+        console.error(error);
+      }
+      return null;
+    }
   }
 }
 
