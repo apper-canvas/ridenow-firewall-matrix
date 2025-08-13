@@ -393,5 +393,3 @@ class RideService {
 }
 
 export default new RideService();
-
-export default new RideService();

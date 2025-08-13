@@ -206,4 +206,3 @@ class VehicleTypeService {
 }
 
 export default new VehicleTypeService();
-export default new VehicleTypeService();
